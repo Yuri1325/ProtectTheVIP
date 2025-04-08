@@ -1,12 +1,12 @@
 import pygame
 vector = pygame.math.Vector2
 class Player(pygame.sprite.Sprite):
-    def __init__(self,facingRight = True):
+    def __init__(self,player_id,facingRight = True):
         super().__init__()
         self.position = vector(0,0)
         self.rect = pygame.Surface((20,50))
-        self.rect.fill('White')
-   
+        self.player_id = player_id
+        self.setColor(self.player_id)
     def movement(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w] or keys[pygame.K_UP]:
@@ -20,6 +20,26 @@ class Player(pygame.sprite.Sprite):
             
     def update(self,win):
         self.draw(win)
-        self.movement()
     def draw(self,window):
         window.blit(self.rect,(self.position[0],self.position[1]))
+    def setColor(self,id):
+        if id == 0:
+            self.rect.fill('White')
+        elif id ==1:
+            self.rect.fill('Red')
+        elif id ==2:
+            self.rect.fill('Blue')
+        elif id ==3:
+            self.rect.fill('Green')
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        # Exclude the non-serializable attributes
+        del state['rect']
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self.rect = pygame.Surface((20,50))
+       
+    
+    

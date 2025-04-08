@@ -1,4 +1,4 @@
 class Constants:
-    SERVER_IP = "fd22:4e39:e630:1:cbd9:571c:80ac:603f"
+    SERVER_IP = "fe80::539d:f578:517b:a9c2%13"
     PORT = 5050
         
