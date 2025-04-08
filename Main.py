@@ -9,26 +9,26 @@ clock = pygame.time.Clock()
 n = Network()
 player = Player(n.id)
 package = Package(n.id,player)
-otherPackages = []
+
 playersList = [player,]
 run = True
 
 def sortPackages(wanted_id,list):
     for x in list:
+        print(type(x.getPlayer()))
         if x.getClient_Id == wanted_id:
             return x.getPlayer()
 def handleOtherPalyer(otherPackage):
     global playersList
-    otherPlayers_1 = start_new_thread(sortPackages,(1,otherPackage))
-    playersList.append(otherPlayers_1)
-    otherPlayers_2 = start_new_thread(sortPackages,(2,otherPackage))
-    playersList.append(otherPlayers_2)
-    otherPlayers_3 = start_new_thread(sortPackages,(3,otherPackage))
-    playersList.append(otherPlayers_3)
-def updatePlayers():
-        global playersList,screen
-        for x in playersList:
-             x.update(screen)
+    otherPlayers_1 =sortPackages,(1,otherPackage)
+    otherPlayers_2 = sortPackages,(2,otherPackage)
+    otherPlayers_3 = sortPackages,(3,otherPackage)
+    print(type(otherPlayers_1))
+    #otherPlayers_1.update(screen)
+    #otherPlayers_2.update(screen)
+    #otherPlayers_3.update(screen)
+    
+
 while run:
     screen.fill((0,0,0))
     clock.tick(60)
@@ -38,12 +38,13 @@ while run:
     
     
     player.draw(screen)
-    
-    package.setPlayer(player)
-    otherPackages = n.send(package)
-    handleOtherPalyer(otherPackages)
-    #updatePlayers()
     player.movement()
+    package.setPlayer(player)
+    otherPackages = n.send(package).getChildrenList()
+    #print(otherPackages)
+    handleOtherPalyer(otherPackages)
+    
+    
     pygame.display.update()
     pygame.display.flip()
     

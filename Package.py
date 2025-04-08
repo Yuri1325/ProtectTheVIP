@@ -10,3 +10,5 @@ class Package:
         self.player = player
     def getClient_Id(self):
         return self.client_id
+    def getChildrenList(self):
+        return self.childPackages

@@ -15,7 +15,7 @@ print("[SERVER STARTED] Waiting for Connections....")
 
 clientCounter = 0
 packageList = [Package(0,Player(0,True)),Package(1,Player(1,True)),Package(2,Player(2,True)),Package(3,Player(3,True))]
-print(packageList[0].player.position)
+
 def runClient(conn,client_id):
     global packageList,clientCounter
     conn.send(str(client_id).encode())
@@ -25,8 +25,8 @@ def runClient(conn,client_id):
         try:
             receivedMessage = pickle.loads(conn.recv(2048))
             packageList[client_id] = receivedMessage
-            sendingMessage = pickle.dumps(getOtherPackages(client_id))
-            conn.sendall(sendingMessage)
+            sendingMessage =getOtherPackages(client_id)
+            conn.sendall(pickle.dumps(sendingMessage))
         except Exception as e:
             print(f"[CLIENT ERROR] {e}")
         
@@ -35,7 +35,7 @@ def runClient(conn,client_id):
 
 def getOtherPackages(client_id):
     global packageList
-    p = Package(None,None)
+    p = Package(client_id,None)
     for x in packageList:
         if x.client_id != client_id:
             p.childPackages.append(x)
