@@ -12,8 +12,8 @@ class Network:
     
     def send(self,package):
         self.socket.send(pickle.dumps(package))
-        return self.rcv()
-        #return pickle.loads(self.socket.recv(2048))
+        return pickle.loads(self.socket.recv(2048))
+        
     def rcv(self):
         return pickle.loads(self.socket.recv(2048))
     

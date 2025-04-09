@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         window.blit(self.rect,(self.position[0],self.position[1]))
     def setColor(self,id):
         if id == 0:
-            self.rect.fill('White')
+            self.rect.fill('Yellow')
         elif id ==1:
             self.rect.fill('Red')
         elif id ==2:

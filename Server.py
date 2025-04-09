@@ -35,10 +35,10 @@ def runClient(conn,client_id):
 
 def getOtherPackages(client_id):
     global packageList
-    p = Package(client_id,None)
+    p = []
     for x in packageList:
         if x.client_id != client_id:
-            p.childPackages.append(x)
+            p.append(x)
     return p
 
 while True:
