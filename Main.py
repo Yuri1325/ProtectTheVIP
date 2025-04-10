@@ -9,12 +9,11 @@ screen = pygame.display.set_mode((1920/2,1088/2))
 clock = pygame.time.Clock()
 n = Network()
 player = Player(n.id)
-package = Package(n.id,player)
 
 playersList =[]
 run = True
 
-
+ 
 
 
 # def displayOtherCharacter():
@@ -35,11 +34,12 @@ while run:
             run = False
     
       
-   
+    
+    package = Package(n.id,player)
     player.movement(screen)
-    package.setPlayer(player)
+    #package.setPlayer(player)
     otherPackages = n.send(package)
-    p1,p2,p3 = handleOtherPalyer(otherPackages)
+    
     
     
     
