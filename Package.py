@@ -3,7 +3,6 @@ class Package:
         self.client_id = client_id
         self.player = player
         self.client_id = client_id
-        self.childPackages = []
     def getPlayer(self):
         return self.player
     def setPlayer(self,player):

@@ -6,19 +6,20 @@ class Player(pygame.sprite.Sprite):
         self.position = vector(0,0)
         self.rect = pygame.Surface((20,50))
         self.player_id = player_id
-        self.setColor(self.player_id)
-    def movement(self):
+        self.rect.fill('White')
+        
+    def movement(self,win):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w] or keys[pygame.K_UP]:
-            self.position[1] -=5
+            self.position[1] -=0.5
         elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
-            self.position[1] +=5
+            self.position[1] +=0.5
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-            self.position[0] +=5
+            self.position[0] +=0.5
         elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
-            self.position[0] -=5
-            
-    def update(self,win):
+            self.position[0] -=0.5
+        self.update_f(win)  
+    def update_f(self,win):
         self.draw(win)
     def draw(self,window):
         window.blit(self.rect,(self.position[0],self.position[1]))

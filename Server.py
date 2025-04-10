@@ -23,9 +23,10 @@ def runClient(conn,client_id):
     while True:
         
         try:
+            print(f"Player Type:{type(packageList[0].getPlayer())}")
             receivedMessage = pickle.loads(conn.recv(2048))
             packageList[client_id] = receivedMessage
-            sendingMessage =getOtherPackages(client_id)
+            sendingMessage =packageList
             conn.sendall(pickle.dumps(sendingMessage))
         except Exception as e:
             print(f"[CLIENT ERROR] {e}")
