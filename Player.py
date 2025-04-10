@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
         self.position = vector(0,0)
         self.rect = pygame.Surface((20,50))
         self.player_id = player_id
-        self.rect.fill('White')
+        self.rect.fill('Black')
         
     def movement(self,win):
         keys = pygame.key.get_pressed()

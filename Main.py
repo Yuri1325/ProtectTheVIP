@@ -7,26 +7,24 @@ from _thread import *
 pygame.init()
 screen = pygame.display.set_mode((1920/2,1088/2))
 clock = pygame.time.Clock()
+
 n = Network()
 player = Player(n.id)
 
 playersList =[]
 run = True
 
+
  
 
 
-# def displayOtherCharacter():
-#      for i in playersList:
-#          if (i!=None):
-#             i.update(screen)
-    
+
     
    
 clock.tick(60)
 
 while run:
-    screen.fill((0,0,0))
+    screen.fill((255,255,255))
     #pygame.display.update()
     
     for event in pygame.event.get():
@@ -37,9 +35,14 @@ while run:
     
     package = Package(n.id,player)
     player.movement(screen)
-    #package.setPlayer(player)
     otherPackages = n.send(package)
-    
+    print(f"Player Pos; {player.position}")
+    for x in otherPackages:
+        if x.getPlayer().player_id !=player.player_id:
+            x.getPlayer().draw(screen)
+
+            
+
     
     
     
